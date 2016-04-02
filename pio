@@ -1,0 +1,21 @@
+#!/bin/coffee
+'use strict'
+
+{PUTIO_TOKEN} = process.env
+Pio = require('./Pio')
+
+unless PUTIO_TOKEN?.trim().length
+  {red} = require('chalk')
+
+  console.log red '''
+
+  ×× ERROR: Variable "PUTIO_TOKEN" not found.
+  ───────────────────────────────────────────
+  1. Generate a new token here: https://put.io/v2/oauth2/register
+  2. Add that token to an environment variable named "PUTIO_TOKEN"
+  3. Run pio again
+
+  '''
+
+else
+  new Pio(PUTIO_TOKEN).home()
